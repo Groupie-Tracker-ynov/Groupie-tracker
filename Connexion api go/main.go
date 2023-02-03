@@ -16,6 +16,7 @@ func main() {
 	router := gin.Default()
 	router.Static("/css", "./css")
 	router.LoadHTMLGlob("pages/*")
+	router.Static("/js", "./js")
 
 	router.SetFuncMap(template.FuncMap{
 		"upper": strings.ToUpper,
