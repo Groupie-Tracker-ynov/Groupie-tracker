@@ -12,6 +12,46 @@ body {
     background-color: rgb(53, 53, 53);
 }
 
+.search{
+    display: flex;
+    justify-content: center;
+}
+
+.-search {
+    height: 40px;
+    width: 172px;
+    border-radius: 20px;
+    padding-left: 10px;
+    transition: width 0.6s ease-in-out;
+    margin-top: 45px;
+    
+
+  }
+
+
+.-search:focus {
+    width: 400px;
+    padding-left: 125px;
+}
+
+
+.filter {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+
+.input-filter {
+    height: 35px;
+    width: 172px;
+    border-radius: 20px;
+    padding-left: 10px;
+    margin-top: 25px;
+    margin-right: 10px;
+    
+}
+
 .container-main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
