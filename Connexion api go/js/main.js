@@ -1,7 +1,7 @@
 const containerMain = document.querySelector('.container-main')
 
 function containerDisplay() {
-    containerMain.innerHTML =
+    containerMain.innerHTML +=
         `
          <div class="card">
                 <div class="back-img" style="background: no-repeat url(../css/pnl.jpg) center;"></div>
