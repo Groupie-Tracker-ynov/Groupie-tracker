@@ -12,11 +12,7 @@ body {
     background-color: rgb(53, 53, 53);
 }
 
-<<<<<<< HEAD
 .search {
-=======
-.search{
->>>>>>> 8e23cce44aa368b46c4f3c7560750a1c4923cf1f
     display: flex;
     justify-content: center;
 }
@@ -28,40 +24,27 @@ body {
     padding-left: 10px;
     transition: width 0.6s ease-in-out;
     margin-top: 45px;
-<<<<<<< HEAD
-
-
 }
-=======
-    
 
-  }
 
->>>>>>> 8e23cce44aa368b46c4f3c7560750a1c4923cf1f
+
+
 
 .-search:focus {
     width: 400px;
     padding-left: 125px;
-<<<<<<< HEAD
     background-color: transparent;
     color: white;
 }
 
-=======
-}
 
 
->>>>>>> 8e23cce44aa368b46c4f3c7560750a1c4923cf1f
 .filter {
     display: flex;
     justify-content: center;
     margin-top: 50px;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 8e23cce44aa368b46c4f3c7560750a1c4923cf1f
 .input-filter {
     height: 35px;
     width: 172px;
@@ -69,7 +52,6 @@ body {
     padding-left: 10px;
     margin-top: 25px;
     margin-right: 10px;
-<<<<<<< HEAD
     cursor: pointer;
     transition: 0.2s ease-in-out;
 
@@ -82,9 +64,7 @@ body {
 .input-filter:active {
     color: white;
     background-color: transparent;
-=======
-    
->>>>>>> 8e23cce44aa368b46c4f3c7560750a1c4923cf1f
+
 }
 
 .container-main {
