@@ -27,16 +27,12 @@ body {
 }
 
 
-
-
-
 .-search:focus {
     width: 400px;
     padding-left: 125px;
     background-color: transparent;
     color: white;
 }
-
 
 
 .filter {
