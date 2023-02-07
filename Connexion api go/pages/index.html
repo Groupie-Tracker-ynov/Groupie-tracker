@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Groupie-Tracker</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style1.css">
+    <link rel="icon" href="../img/logo.jpg">
 </head>
 
 <body>
@@ -24,35 +25,24 @@
         </div>
     </div>
 
-    <div class="container-main"></div>
-
-    <script>
-        const containerMain = document.querySelector('.container-main')
-
-        function containerDisplay() {
-            containerMain.innerHTML +=
-                `
-         <div class="card">
-                <div class="back-img" style="background: no-repeat url(../css/pnl.jpg) center;"></div>
+    <div class="container-main">
+        {{range .artistes}}
+        <a href="">
+            <div class="card">
+                <div class="back-img" style="background: no-repeat url('img/{{ .Image}}.jpg') center;"></div>
                 <div class="contenue">
-                    <a href="#"><img src="../css/pnl.jpg" alt="nom de l'artiste" class="img"></a>
-                    <h1 class="h1">PNL</h1>
-                    <h4 class="h4">Debut: 2014</h4>
-                    <h4 class="h4">Premier Album: Monchico 2014</h4>
-                    <h4 class="h4">Nom de tout les artistes du groupe (si groupe)</h4>
+                    <img src="img/{{ .Image}}.jpg" alt="nom de l'artiste" class="img">
+                    <h1 class="h1">{{ .Nom}}</h1>
+                    <h4 class="h4">Début de sa carrière : {{.Debutcarriere}}</h4>
+                    <h4 class="h4">Date de son premier album : {{.Datepremieralbum}}</h4>
+                    <h4 class="h4">{{.Membres}}</h4>
                     <h4 class="h4">Localisation de leur prochain/dernier concert: Paris</h4>
                     <h4 class="h4">Date de leur prochain/dernier concert: 2022</h4>
                 </div>
             </div>
-
-        `
-        }
-
-
-        for (i = 0; i < 15; i++) {
-            containerDisplay()
-        }
-    </script>
+        </a>
+        {{end}}
+    </div>
 </body>
 
 </html>
