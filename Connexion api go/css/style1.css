@@ -29,6 +29,7 @@ body {
     width: 172px;
     border-radius: 20px;
     padding-left: 10px;
+    text-align: center;
     transition: width 0.6s ease-in-out;
     color: rgb(255, 255, 255);
     background-color: transparent;
@@ -42,7 +43,6 @@ body {
 
 .-search:focus {
     width: 400px;
-    padding-left: 125px;
 }
 
 .-search:hover {
@@ -83,6 +83,7 @@ body {
 a {
     text-decoration: none;
     color: rgb(255, 255, 255);
+    cursor: default;
 }
 
 .card {
