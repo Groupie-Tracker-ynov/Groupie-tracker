@@ -170,7 +170,7 @@ footer {
 @media screen and (max-width:1370px) {
 
     .container-header {
-        flex-wrap: wrap;
+        justify-content: space-between;
     }
 
     .filter {
@@ -188,6 +188,14 @@ footer {
 
     li {
         margin-bottom: 20px;
+    }
+
+    .burger-menu {
+        margin-left: 50px;
+    }
+
+    .-search {
+        margin-right: 50px;
     }
 
     #burger-menu {
@@ -288,6 +296,10 @@ footer {
 @media screen and (max-width: 780px) {
     .container-main {
         grid-template-columns: 1fr;
+    }
+
+    .-search:focus {
+        width: 180px;
     }
 }
 
