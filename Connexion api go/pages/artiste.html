@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Information Artiste</title>
-    <link rel="stylesheet" href="/css/artiste2.css">
+    <link rel="stylesheet" href="/css/artiste.css">
 </head>
 <body>
+
+    <h2 class="home"><a href="http://localhost:8080/groupietracker">Groupie-Tracker</a></h2>
    
     <div class="container-main">
-        <div class="back-img" style="background: no-repeat url('{{.Image}}') center;"></div>
-            <div class="card">
                 <img src="{{.Image}}" alt="nom de l'artiste" class="img">
                 <div class="contenue">
                     <h1 class="h1">{{ .Nom}}</h1>
@@ -20,7 +20,6 @@
                     <h4 class="h4">Membres:{{.Membres}}</h4>
                     <h4 class="h4">Localisation de leur prochain/dernier concert: Paris</h4>
                     <h4 class="h4">Date de leur prochain/dernier concert: 2022</h4>
-                </div>
             </div>
     </div>
     

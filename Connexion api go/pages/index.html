@@ -6,29 +6,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Groupie-Tracker</title>
-    <link rel="stylesheet" href="../css/style2.css">
+    <link rel="stylesheet" href="../css/atyle.css">
     <link rel="icon" href="../img/logo.jpg">
 </head>
 
 <body>
 
     <div class="container-header">
+
+
+        <div id="burger-menu" class="burger-menu">
+            <span></span>
+          </div>
+          
+          <div id="menu" class="filter">
+              <ul>
+                <li><h2 class="home"><a href="http://localhost:8080/groupietracker">Groupie-Tracker</a></h2></li>
+
+                <li><form action="/groupietracker/asc">
+                    <input class="input-filter" type="submit" value="aA-zZ" name="a-z" method="post">
+                </form></li>
+
+
+                <li><form action="/groupietracker/desc">
+                    <input class="input-filter" type="submit" value="zZ-aA" name="z-a" method="post">
+                </form></li>
+
+                <li><input class="input-filter" type="submit" value="Concert le plus ancient" name="age" method="post"></li>
+                <li><input class="input-filter" type="submit" value="Concert le plus recent" name="recent" method="post"></li>
+              </ul>
+          </div>
+
+
         <div class="search">
             <input class="-search" type="search" placeholder="Rechercher votre artiste" name="search">
         </div>
 
-        <div class="filter">
-            <form action="/groupietracker/asc">
-                <input class="input-filter" type="submit" value="aA-zZ" name="a-z" method="post">
-            </form>
-            <form action="/groupietracker/desc">
-                <input class="input-filter" type="submit" value="zZ-aA" name="z-a" method="post">
-            </form>
-
-
-            <input class="input-filter" type="submit" value="Concert le plus ancient" name="age" method="post">
-            <input class="input-filter" type="submit" value="Concert le plus recent" name="recent" method="post">
-        </div>
+       
     </div>
 
     <div class="container-main">
@@ -49,6 +63,19 @@
         </a>
         {{end}}
     </div>
+
+    <footer>
+        <h1 class="titleFooter"><a href="http://localhost:8080/groupietracker">Groupie-Tracker</a></h1>
+    </footer>
+
+    <script>
+        var burgerMenu = document.getElementById('burger-menu');
+        var overlay = document.getElementById('menu');
+        burgerMenu.addEventListener('click',function(){
+          this.classList.toggle("close");
+          overlay.classList.toggle("overlay");
+        });
+    </script>
 </body>
 
 </html>

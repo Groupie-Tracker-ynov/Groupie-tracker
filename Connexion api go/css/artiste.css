@@ -27,37 +27,28 @@ body::-webkit-scrollbar-thumb {
     border: 2px solid rgb(255, 255, 255);
 }
 
+.home a {
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+.home {
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
 .container-main {
-    display: grid;
-    place-items: center;
-}
-
-.card {
-    height: 600px;
-    width: 380px;
-    padding: 20px;
-    border-radius: 20px;
-    transition: 0.2s ease-in-out;
-}
-
-
-.back-img {
-    height: 600px;
-    width: 800px;
-    margin-top: 120px;
-    /* background: no-repeat url(./pnl.jpg) center; */
-    filter: blur(1.3rem);
-    border-radius: 20px;
-    transform-origin: center;
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
 }
 
 .contenue {
-    transform: translateY(-400px);
+    margin-left: 80px;
 }
 
-.img {
+
+/* .img {
     position: absolute;
     top: 80px;
     left: 300px;
@@ -65,8 +56,14 @@ body::-webkit-scrollbar-thumb {
     height: 200px;
     border-radius: 1500px;
     border: solid 2px;
-}
+} */
 
+.img {
+    width: 200px;
+    height: 200px;
+    border-radius: 1500px;
+    border: solid 2px;
+}
 
 .h1 {
     padding-bottom: 20px;
