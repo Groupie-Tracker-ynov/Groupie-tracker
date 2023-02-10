@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Groupie-Tracker</title>
-    <link rel="stylesheet" href="../css/style1.css">
+    <link rel="stylesheet" href="../css/style2.css">
     <link rel="icon" href="../img/logo.jpg">
 </head>
 
@@ -18,8 +18,14 @@
         </div>
 
         <div class="filter">
-            <input class="input-filter" type="submit" value="aA-zZ" name="a-z" method="post">
-            <input class="input-filter" type="submit" value="zZ-aA" name="z-a" method="post">
+            <form action="/groupietracker/asc">
+                <input class="input-filter" type="submit" value="aA-zZ" name="a-z" method="post">
+            </form>
+            <form action="/groupietracker/desc">
+                <input class="input-filter" type="submit" value="zZ-aA" name="z-a" method="post">
+            </form>
+
+
             <input class="input-filter" type="submit" value="Concert le plus ancient" name="age" method="post">
             <input class="input-filter" type="submit" value="Concert le plus recent" name="recent" method="post">
         </div>
@@ -27,11 +33,11 @@
 
     <div class="container-main">
         {{range .artistes}}
-        <a href="">
+        <a href="/groupietracker/artiste/{{.ID}}">
             <div class="card">
-                <div class="back-img" style="background: no-repeat url('img/{{ .Image}}.jpg') center;"></div>
+                <div class="back-img" style="background: no-repeat url('{{ .Image}}') center;"></div>
                 <div class="contenue">
-                    <img src="img/{{ .Image}}.jpg" alt="nom de l'artiste" class="img">
+                    <img src="{{ .Image}}" alt="nom de l'artiste" class="img">
                     <h1 class="h1">{{ .Nom}}</h1>
                     <h4 class="h4">Début de sa carrière : {{.Debutcarriere}}</h4>
                     <h4 class="h4">Date de son premier album : {{.Datepremieralbum}}</h4>
