@@ -23,16 +23,21 @@
                 <li><h2 class="home"><a href="http://localhost:8080/groupietracker">Groupie-Tracker</a></h2></li>
 
                 <li><form action="/groupietracker/asc">
-                    <input class="input-filter" type="submit" value="aA-zZ" name="a-z" method="post">
+                    <input class="input-filter" type="submit" value="aA-zZ" name="a-z">
                 </form></li>
 
 
                 <li><form action="/groupietracker/desc">
-                    <input class="input-filter" type="submit" value="zZ-aA" name="z-a" method="post">
+                    <input class="input-filter" type="submit" value="zZ-aA" name="z-a">
                 </form></li>
 
-                <li><input class="input-filter" type="submit" value="Concert le plus ancient" name="age" method="post"></li>
-                <li><input class="input-filter" type="submit" value="Concert le plus recent" name="recent" method="post"></li>
+                <li><form action="/groupietracker/rec">
+                    <input class="input-filter" type="submit" value="Concert le plus recent" name="recent">
+                </form></li>
+
+                <li><form action="/groupietracker/anc">
+                    <input class="input-filter" type="submit" value="Concert le plus ancient" name="age">
+                </form></li>
               </ul>
           </div>
 
