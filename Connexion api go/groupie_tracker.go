@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -65,6 +66,7 @@ func main() {
 		Artistes = OrderConcert(db, false)
 		c.HTML(http.StatusOK, "index.html", gin.H{"artistes": Artistes})
 	})
+	router.Use(cors.New(cors.Config{AllowOrigins: []string{"http://127.0.0.1:5500"}, AllowMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}, AllowHeaders: []string{"Origin", "Content-Type", "Content-Length"}, ExposeHeaders: []string{"Content-Length"}, AllowCredentials: true, MaxAge: 12 * 60 * 60}))
 	router.Run("localhost:8080")
 
 }

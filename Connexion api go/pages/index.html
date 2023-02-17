@@ -25,8 +25,7 @@
                 <li><form action="/groupietracker/asc">
                     <input class="input-filter" type="submit" value="aA-zZ" name="a-z">
                 </form></li>
-
-
+                
                 <li><form action="/groupietracker/desc">
                     <input class="input-filter" type="submit" value="zZ-aA" name="z-a">
                 </form></li>
@@ -56,13 +55,12 @@
     </footer>
 
     <script>
-        const result = document.querySelectorAll(".card");
         const form = document.querySelector(".formSearch");
         const input = document.querySelector(".-search");
         const container = document.querySelector(".container-main");
         
         function displayContainer() {
-            container.innerHTML = `
+            return container.innerHTML = `
                                 {{range .artistes}}
                                 <a href="/groupietracker/artiste/{{.ID}}">
                                     <div class="card">
@@ -83,6 +81,14 @@
         };
 
         displayContainer()
+        input.addEventListener("input", (e) => {
+            fetchMeals(e.target.value);
+        });
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            displayContainer();
+        });
         
         var burgerMenu = document.getElementById("burger-menu");
         var overlay = document.getElementById("menu");
