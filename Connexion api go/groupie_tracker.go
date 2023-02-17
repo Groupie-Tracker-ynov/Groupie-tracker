@@ -57,6 +57,7 @@ func main() {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
 	router.Run("localhost:8080")
+
 }
 
 func chooseArtist(db *sql.DB, s string, liste []Artiste) Artiste {
