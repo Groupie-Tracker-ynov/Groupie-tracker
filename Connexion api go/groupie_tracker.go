@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -35,13 +36,16 @@ func main() {
 		panic(err.Error())
 	}
 	defer db.Close()
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"*"} // Vous pouvez remplacer "*" par un ou plusieurs domaines que vous souhaitez autoriser
+	router.Use(cors.New(config))
 	router.GET("/groupietracker", func(c *gin.Context) {
 		Artistes = SelectArtists(db)
-		c.HTML(http.StatusOK, "index.html", gin.H{"artistes": Artistes})
+		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
 	})
 	router.GET("/groupietracker/asc", func(c *gin.Context) {
 		Artistes = Order(db, true)
-		c.HTML(http.StatusOK, "index.html", gin.H{"artistes": Artistes})
+		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
 	})
 	router.GET("/groupietracker/desc", func(c *gin.Context) {
 		Artistes = Order(db, false)
@@ -49,8 +53,8 @@ func main() {
 	})
 	router.GET("/groupietracker/artiste/:nom", func(c *gin.Context) {
 		nom := c.Param("nom")
-		artiste := chooseArtist(db, nom, Artistes)
-		c.HTML(http.StatusOK, "artiste.html", gin.H{"Nom": artiste.Nom, "Image": artiste.Image, "Datepremieralbum": artiste.Datepremieralbum,
+		artiste := chooseArtist(db, nom)
+		c.JSON(http.StatusOK, gin.H{"Nom": artiste.Nom, "Image": artiste.Image, "Datepremieralbum": artiste.Datepremieralbum,
 			"Debutcarriere": artiste.Debutcarriere, "Membres": artiste.Membres, "Date": artiste.Date, "Lieu": artiste.Lieu})
 	})
 	router.POST("/groupietracker/artiste/add", func(c *gin.Context) {
@@ -68,18 +72,17 @@ func main() {
 
 }
 
-func chooseArtist(db *sql.DB, s string, liste []Artiste) Artiste {
+func chooseArtist(db *sql.DB, nom string) Artiste {
 	var str Artiste
-	row, err := db.Query("SELECT * FROM Artiste")
+	rows, err := db.Query("SELECT Artiste.id_art,Artiste.noms,Artiste.image,Artiste.debutcarriere,Artiste.datepremieralbum,Artiste.membres,info_concert.concert_date,Lieu.lieu_concert FROM Artiste INNER JOIN info_concert ON Artiste.id_art = info_concert.id_art INNER JOIN Lieu ON Artiste.id_art = Lieu.id_lieu WHERE Artiste.id_art = (?);", nom)
 	if err != nil {
 		log.Println(err)
 	}
-	defer row.Close()
-	for i := 0; i < NbLigne(db); i++ {
-		if fmt.Sprint(liste[i].ID) == s {
-			return liste[i]
-		}
+	defer rows.Close()
+	for rows.Next() {
+		rows.Scan(&str.ID, &str.Nom, &str.Image, &str.Debutcarriere, &str.Datepremieralbum, &str.Membres, &str.Date, &str.Lieu)
 	}
+	log.Println("Artistes : ", str.ID, " ", str.Nom, " ", str.Image, " ", str.Debutcarriere, " ", str.Datepremieralbum, " ", str.Membres, " ", str.Date, " ", str.Lieu)
 	return str
 }
 func SelectArtists(db *sql.DB) []Artiste {
@@ -125,7 +128,6 @@ func Order(db *sql.DB, flag bool) []Artiste {
 	for row.Next() {
 		row.Scan(&str.ID, &str.Nom, &str.Image, &str.Debutcarriere, &str.Datepremieralbum, &str.Membres, &str.Date, &str.Lieu)
 		liste = append(liste, str)
-		log.Println("Artistes : ", str.ID, " ", str.Nom, " ", str.Image, " ", str.Debutcarriere, " ", str.Datepremieralbum, " ", str.Membres)
 	}
 	return liste
 }

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Utilisation des données d'un fichier JSON</title>
+  </head>
+  <body>
+    <ul id="liste-fruits"></ul>
+
+    <script>
+        fetch('http://localhost:8080/groupietracker')
+          .then(res => res.json())
+          .then(data => console.log(data))
+    </script>
+  </body>
+</html>
