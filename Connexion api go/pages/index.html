@@ -25,8 +25,7 @@
                 <li><form action="/groupietracker/asc">
                     <input class="input-filter" type="submit" value="aA-zZ" name="a-z">
                 </form></li>
-
-
+                
                 <li><form action="/groupietracker/desc">
                     <input class="input-filter" type="submit" value="zZ-aA" name="z-a">
                 </form></li>
@@ -43,43 +42,62 @@
 
 
         <div class="search">
-            <input class="-search" type="search" placeholder="Rechercher votre artiste" name="search">
+            <form action="" class="formSearch">
+                <input class="-search" type="search" placeholder="Rechercher votre artiste" name="search">
+            </form>
         </div>
-
-       
     </div>
 
-    <div class="container-main">
-        {{range .artistes}}
-        <a href="/groupietracker/artiste/{{.ID}}">
-            <div class="card">
-                <div class="back-img" style="background: no-repeat url('{{ .Image}}') center;"></div>
-                <div class="contenue">
-                    <img src="{{ .Image}}" alt="nom de l'artiste" class="img">
-                    <h1 class="h1">{{.Nom}}</h1>
-                    <h4 class="h4">Début de sa carrière : {{.Debutcarriere}}</h4>
-                    <h4 class="h4">Date de son premier album : {{.Datepremieralbum}}</h4>
-                    <h4 class="h4">{{.Membres}}</h4>
-                    <h4 class="h4">Localisation de leur prochain/dernier concert: {{.Lieu}}</h4>
-                    <h4 class="h4">Date de leur prochain/dernier concert: {{.Date}}</h4>
-                </div>
-            </div>
-        </a>
-        {{end}}
-    </div>
+    <div class="container-main"></div>
 
     <footer>
         <h1 class="titleFooter"><a href="http://localhost:8080/groupietracker">Groupie-Tracker</a></h1>
     </footer>
 
     <script>
-        var burgerMenu = document.getElementById('burger-menu');
-        var overlay = document.getElementById('menu');
-        burgerMenu.addEventListener('click',function(){
+        const form = document.querySelector(".formSearch");
+        const input = document.querySelector(".-search");
+        const container = document.querySelector(".container-main");
+        
+        function displayContainer() {
+            return container.innerHTML = `
+                                {{range .artistes}}
+                                <a href="/groupietracker/artiste/{{.ID}}">
+                                    <div class="card">
+                                        <div class="back-img" style="background: no-repeat url('{{ .Image}}') center;"></div>
+                                        <div class="contenue">
+                                            <img src="{{ .Image}}" alt="nom de l'artiste" class="img">
+                                            <h1 class="h1">{{.Nom}}</h1>
+                                            <h4 class="h4">Début de sa carrière : {{.Debutcarriere}}</h4>
+                                            <h4 class="h4">Date de son premier album : {{.Datepremieralbum}}</h4>
+                                            <h4 class="h4">{{.Membres}}</h4>
+                                            <h4 class="h4">Localisation de leur prochain/dernier concert: {{.Lieu}}</h4>
+                                            <h4 class="h4">Date de leur prochain/dernier concert: {{.Date}}</h4>
+                                        </div>
+                                    </div>
+                                </a>
+                                {{end}}
+                            `;
+        };
+
+        displayContainer()
+        input.addEventListener("input", (e) => {
+            fetchMeals(e.target.value);
+        });
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            displayContainer();
+        });
+        
+        var burgerMenu = document.getElementById("burger-menu");
+        var overlay = document.getElementById("menu");
+        burgerMenu.addEventListener("click", function () {
           this.classList.toggle("close");
           overlay.classList.toggle("overlay");
         });
-    </script>
+        </script>
+    
 </body>
 
 </html>

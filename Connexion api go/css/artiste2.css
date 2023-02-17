@@ -45,6 +45,18 @@ body::-webkit-scrollbar-thumb {
 
 .contenue {
     margin-left: 80px;
+    background-color: rgba(26, 26, 26, 0.616);
+    height: 100%;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.concert {
+    margin-left: 50px;
+    background-color: rgba(26, 26, 26, 0.616);
+    height: 100%;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 
