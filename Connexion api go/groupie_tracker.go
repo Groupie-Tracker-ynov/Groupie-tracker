@@ -29,6 +29,7 @@ func main() {
 	router := gin.Default()
 	router.Static("/css", "./css")
 	router.Static("/img", "./img")
+	router.Static("/js", "./js")
 	router.LoadHTMLGlob("pages/*")
 	db, err := sql.Open("sqlite3", "./groupietracker.db")
 	if err != nil {
