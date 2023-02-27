@@ -148,31 +148,35 @@ function displayAllArtistsAnc() {
 
 displayAllArtists();
 
-// function GetArtiste() {
-//   fetch(`http://localhost:8080/groupietracker/artiste`)
-//     .then((res) => res.json())
-//     .then((data) => {
-//       const container = document.querySelector(".container-main");
-//       container.innerHTML = "";
-//       data.artistes.forEach((artiste) => {
-//         const div = document.createElement("div");
-//         div.innerHTML = `
-//                                 <div class="container-main">
-//                                     <img src="${artiste.Image}" alt="nom de l'artiste" class="img">
-//                                         <div class="contenue">
-//                                             <h1 class="h1">${artiste.Nom}</h1>
-//                                             <h3 class="h4">Début de sa carrière : ${artiste.Debutcarriere}</h3>
-//                                             <h3 class="h4">Dates de son premier album : ${artiste.Datepremieralbum}</h3>
-//                                             <h3 class="h4">Membres: ${artiste.Membres}</h3>
-//                                             <h3 class="h4">Localisation de leur prochain/dernier concert: ${artiste.Lieu}</h3>
-//                                             <h3 class="h4">Date de leur prochain/dernier concert: ${artiste.Date}</h3>
-//                                 </div>
-//                                 `;
-//         container.appendChild(div);
-//       });
-//     });
-// }
-// GetArtiste();
+//************************** */
+const searchInput = document.getElementById("search-input");
+const searchResults = document.getElementById("search-results");
+let art = [];
 
-// const click = document.querySelector(".card");
-// click.addEventListener("click", GetArtiste);
+async function recherche(search) {
+  await fetch(`http://localhost:8080/groupietracker/${search}`)
+    .then((res) => res.json())
+    .then((data) => (art = data.art));
+  console.log(art);
+}
+
+function searchDisplay() {
+  searchInput.addEventListener("input", (e) => {
+    e.preventDefault();
+
+    searchResults.innerHTML = "";
+    if (art === null) {
+      searchResults.innerHTML = "Aucun résultat trouvé.";
+    } else {
+      art.forEach((artiste) => {
+        const groupieElement = document.createElement("div");
+        groupieElement.classList.add("groupie");
+        groupieElement.innerHTML = `<h2>${artiste.Nom}</h2>`;
+        searchResults.appendChild(groupieElement);
+      });
+    }
+  });
+}
+
+recherche();
+searchDisplay();

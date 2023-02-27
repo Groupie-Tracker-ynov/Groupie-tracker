@@ -45,6 +45,15 @@ func main() {
 		Artistes = SelectArtists(db)
 		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
 	})
+
+	//************************
+	router.GET("/groupietracker/:nom", func(c *gin.Context) {
+		nom := c.Param("nom")
+		Artistes := search(db, nom)
+		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
+	})
+	//************************
+
 	router.GET("/groupietracker/asc", func(c *gin.Context) {
 		Artistes = Order(db, true)
 		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
@@ -66,6 +75,7 @@ func main() {
 		Artistes = OrderConcert(db, false)
 		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
 	})
+
 	router.Use(cors.New(cors.Config{AllowOrigins: []string{"http://127.0.0.1:5500"}, AllowMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}, AllowHeaders: []string{"Origin", "Content-Type", "Content-Length"}, ExposeHeaders: []string{"Content-Length"}, AllowCredentials: true, MaxAge: 12 * 60 * 60}))
 	router.Run("localhost:8080")
 
@@ -84,6 +94,21 @@ func chooseArtist(db *sql.DB, nom string) Artiste {
 	log.Println("Artistes : ", str.ID, " ", str.Nom, " ", str.Image, " ", str.Debutcarriere, " ", str.Datepremieralbum, " ", str.Membres, " ", str.Date, " ", str.Lieu)
 	return str
 }
+
+func search(db *sql.DB, nom string) Artiste {
+	var str Artiste
+	rows, err := db.Query("SELECT Artiste.id_art,Artiste.noms,Artiste.image,Artiste.debutcarriere,Artiste.datepremieralbum,Artiste.membres,info_concert.concert_date,Lieu.lieu_concert FROM Artiste INNER JOIN info_concert ON Artiste.id_art = info_concert.id_art INNER JOIN Lieu ON Artiste.id_art = Lieu.id_lieu WHERE Artiste.noms = (?);", nom)
+	if err != nil {
+		log.Println(err)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		rows.Scan(&str.ID, &str.Nom, &str.Image, &str.Debutcarriere, &str.Datepremieralbum, &str.Membres, &str.Date, &str.Lieu)
+	}
+	log.Println("Artistes : ", str.ID, " ", str.Nom, " ", str.Image, " ", str.Debutcarriere, " ", str.Datepremieralbum, " ", str.Membres, " ", str.Date, " ", str.Lieu)
+	return str
+}
+
 func SelectArtists(db *sql.DB) []Artiste {
 	var liste []Artiste
 	var str Artiste
