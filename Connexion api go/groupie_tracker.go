@@ -25,8 +25,6 @@ type Artiste struct {
 var Artistes []Artiste
 
 func main() {
-	fmt.Println("Hello World")
-
 	router := gin.Default()
 	router.Static("/css", "./css")
 	router.Static("/img", "./img")
@@ -38,8 +36,11 @@ func main() {
 	}
 	defer db.Close()
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"*"} // Vous pouvez remplacer "*" par un ou plusieurs domaines que vous souhaitez autoriser
+	config.AllowOrigins = []string{"*"}
 	router.Use(cors.New(config))
+	router.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "test.html", gin.H{"artistes": Artistes})
+	})
 	router.GET("/groupietracker", func(c *gin.Context) {
 		Artistes = SelectArtists(db)
 		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
@@ -50,24 +51,20 @@ func main() {
 	})
 	router.GET("/groupietracker/desc", func(c *gin.Context) {
 		Artistes = Order(db, false)
-		c.HTML(http.StatusOK, "index.html", gin.H{"artistes": Artistes})
+		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
 	})
 	router.GET("/groupietracker/artiste/:nom", func(c *gin.Context) {
 		nom := c.Param("nom")
 		artiste := chooseArtist(db, nom)
-		c.JSON(http.StatusOK, gin.H{"Nom": artiste.Nom, "Image": artiste.Image, "Datepremieralbum": artiste.Datepremieralbum,
-			"Debutcarriere": artiste.Debutcarriere, "Membres": artiste.Membres, "Date": artiste.Date, "Lieu": artiste.Lieu})
-	})
-	router.POST("/groupietracker/artiste/add", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.html", gin.H{})
+		c.JSON(http.StatusOK, gin.H{"artiste": artiste})
 	})
 	router.GET("/groupietracker/rec", func(c *gin.Context) {
 		Artistes = OrderConcert(db, true)
-		c.HTML(http.StatusOK, "index.html", gin.H{"artistes": Artistes})
+		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
 	})
 	router.GET("/groupietracker/anc", func(c *gin.Context) {
 		Artistes = OrderConcert(db, false)
-		c.HTML(http.StatusOK, "index.html", gin.H{"artistes": Artistes})
+		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
 	})
 	router.Use(cors.New(cors.Config{AllowOrigins: []string{"http://127.0.0.1:5500"}, AllowMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}, AllowHeaders: []string{"Origin", "Content-Type", "Content-Length"}, ExposeHeaders: []string{"Content-Length"}, AllowCredentials: true, MaxAge: 12 * 60 * 60}))
 	router.Run("localhost:8080")

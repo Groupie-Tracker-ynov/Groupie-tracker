@@ -1,15 +1,233 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Groupie-Tracker</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../img/logo.jpg">
 </head>
-<body>
-    <div class="container-main"></div>
-    
 
-    <script src="../js/index.js"></script>
+<body>
+    <div class="container-header">
+
+        <div id="burger-menu" class="burger-menu">
+            <span></span>
+        </div>
+
+        <div id="menu" class="filter">
+            <ul>
+                <li>
+                    <h2 class="home"><a href="http://localhost:8080">Groupie-Tracker</a></h2>
+                </li>
+
+                <li>
+                    <button class="input-filter" onclick="displayAllArtistsAsc()">aA-zZ</button>
+                </li>
+
+                <li>
+                    <button class="input-filter" onclick="displayAllArtistsDesc()">zZ-aA</button>
+                </li>
+
+                <li>
+                    <button class="input-filter" onclick="displayAllArtistsRec()">Récent</button>
+                </li>
+
+                <li>
+                    <button class="input-filter" onclick="displayAllArtistsAnc()">Ancient</button>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="search">
+            <form action="" class="formSearch">
+                <input class="-search" type="search" placeholder="Rechercher votre artiste" name="search">
+            </form>
+        </div>
+    </div>
+
+    <div class="container-main"></div>
+
+    <footer>
+        <h1 class="titleFooter"><a href="http://localhost:8080">Groupie-Tracker</a></h1>
+    </footer>
+
+    <script>
+        function displayAllArtists() {
+            fetch('http://localhost:8080/groupietracker')
+                .then(res => res.json())
+                .then(data => {
+                    const container = document.querySelector(".container-main");
+                    container.innerHTML = "";
+                    data.artistes.forEach(artiste => {
+                        const div = document.createElement("div");
+                        div.innerHTML = `
+                        <a href="/groupietracker/artiste/${artiste.ID}" id="cards">
+                            <div class="card">
+                            <div class="back-img" style="background: no-repeat url('${artiste.Image}') center;"></div>
+                            <div class="contenue">
+                                <img src="${artiste.Image}" alt="${artiste.Nom}" class="img">
+                                <h1 class="h1">${artiste.Nom}</h1>
+                                <h4 class="h4">Début de sa carrière : ${artiste.Debutcarriere}</h4>
+                                <h4 class="h4">Date de son premier album : ${artiste.Datepremieralbum}</h4>
+                                <h4 class="h4">${artiste.Membres}</h4>
+                                <h4 class="h4">Localisation de leur prochain/dernier concert: ${artiste.Lieu}</h4>
+                                <h4 class="h4">Date de leur prochain/dernier concert: ${artiste.Date}</h4>
+                            </div>
+                            </div>
+                        </a>
+                        `;
+                        container.appendChild(div);
+                    });
+                })
+        }
+        function displayAllArtistsAsc() {
+            fetch('http://localhost:8080/groupietracker/asc')
+                .then(res => res.json())
+                .then(data => {
+                    const container = document.querySelector(".container-main");
+                    container.innerHTML = "";
+                    data.artistes.forEach(artiste => {
+                        const div = document.createElement("div");
+                        div.innerHTML = `
+                        <a href="/groupietracker/artiste/${artiste.ID}" id="cards">
+                            <div class="card">
+                            <div class="back-img" style="background: no-repeat url('${artiste.Image}') center;"></div>
+                            <div class="contenue">
+                                <img src="${artiste.Image}" alt="${artiste.Nom}" class="img">
+                                <h1 class="h1">${artiste.Nom}</h1>
+                                <h4 class="h4">Début de sa carrière : ${artiste.Debutcarriere}</h4>
+                                <h4 class="h4">Date de son premier album : ${artiste.Datepremieralbum}</h4>
+                                <h4 class="h4">${artiste.Membres}</h4>
+                                <h4 class="h4">Localisation de leur prochain/dernier concert: ${artiste.Lieu}</h4>
+                                <h4 class="h4">Date de leur prochain/dernier concert: ${artiste.Date}</h4>
+                            </div>
+                            </div>
+                        </a>
+                        `;
+                        container.appendChild(div);
+                    });
+                })
+        }
+        function displayAllArtistsDesc() {
+            fetch('http://localhost:8080/groupietracker/desc')
+                .then(res => res.json())
+                .then(data => {
+                    const container = document.querySelector(".container-main");
+                    container.innerHTML = "";
+                    data.artistes.forEach(artiste => {
+                        const div = document.createElement("div");
+                        div.innerHTML = `
+                        <a href="/groupietracker/artiste/${artiste.ID}" id="cards">
+                            <div class="card">
+                            <div class="back-img" style="background: no-repeat url('${artiste.Image}') center;"></div>
+                            <div class="contenue">
+                                <img src="${artiste.Image}" alt="${artiste.Nom}" class="img">
+                                <h1 class="h1">${artiste.Nom}</h1>
+                                <h4 class="h4">Début de sa carrière : ${artiste.Debutcarriere}</h4>
+                                <h4 class="h4">Date de son premier album : ${artiste.Datepremieralbum}</h4>
+                                <h4 class="h4">${artiste.Membres}</h4>
+                                <h4 class="h4">Localisation de leur prochain/dernier concert: ${artiste.Lieu}</h4>
+                                <h4 class="h4">Date de leur prochain/dernier concert: ${artiste.Date}</h4>
+                            </div>
+                            </div>
+                        </a>
+                        `;
+                        container.appendChild(div);
+                    });
+                })
+        }
+        function displayAllArtistsRec() {
+            fetch('http://localhost:8080/groupietracker/rec')
+                .then(res => res.json())
+                .then(data => {
+                    const container = document.querySelector(".container-main");
+                    container.innerHTML = "";
+                    data.artistes.forEach(artiste => {
+                        const div = document.createElement("div");
+                        div.innerHTML = `
+                        <a href="/groupietracker/artiste/${artiste.ID}" id="cards">
+                            <div class="card">
+                            <div class="back-img" style="background: no-repeat url('${artiste.Image}') center;"></div>
+                            <div class="contenue">
+                                <img src="${artiste.Image}" alt="${artiste.Nom}" class="img">
+                                <h1 class="h1">${artiste.Nom}</h1>
+                                <h4 class="h4">Début de sa carrière : ${artiste.Debutcarriere}</h4>
+                                <h4 class="h4">Date de son premier album : ${artiste.Datepremieralbum}</h4>
+                                <h4 class="h4">${artiste.Membres}</h4>
+                                <h4 class="h4">Localisation de leur prochain/dernier concert: ${artiste.Lieu}</h4>
+                                <h4 class="h4">Date de leur prochain/dernier concert: ${artiste.Date}</h4>
+                            </div>
+                            </div>
+                        </a>
+                        `;
+                        container.appendChild(div);
+                    });
+                })
+        }
+        function displayAllArtistsAnc() {
+            fetch('http://localhost:8080/groupietracker/anc')
+                .then(res => res.json())
+                .then(data => {
+                    const container = document.querySelector(".container-main");
+                    container.innerHTML = "";
+                    data.artistes.forEach(artiste => {
+                        const div = document.createElement("div");
+                        div.innerHTML = `
+                        <a href="/groupietracker/artiste/${artiste.ID}" id="cards">
+                            <div class="card">
+                            <div class="back-img" style="background: no-repeat url('${artiste.Image}') center;"></div>
+                            <div class="contenue">
+                                <img src="${artiste.Image}" alt="${artiste.Nom}" class="img">
+                                <h1 class="h1">${artiste.Nom}</h1>
+                                <h4 class="h4">Début de sa carrière : ${artiste.Debutcarriere}</h4>
+                                <h4 class="h4">Date de son premier album : ${artiste.Datepremieralbum}</h4>
+                                <h4 class="h4">${artiste.Membres}</h4>
+                                <h4 class="h4">Localisation de leur prochain/dernier concert: ${artiste.Lieu}</h4>
+                                <h4 class="h4">Date de leur prochain/dernier concert: ${artiste.Date}</h4>
+                            </div>
+                            </div>
+                        </a>
+                        `;
+                        container.appendChild(div);
+                    });
+                container.addEventListener('click', function (event) {
+                if (event.target.nodeName === "A") {
+                    event.preventDefault();
+                    const href = event.target.getAttribute("href");
+
+                    fetch('http://localhost:8080/groupietracker/artiste/${artiste.ID}')
+                        .then(res => res.json())
+                        .then(data => {
+                            const container = document.querySelector(".container-main");
+                            container.innerHTML = "";
+                            data.artistes.forEach(artiste => {
+                                const div = document.createElement("div");
+                                div.innerHTML = `
+                                    <div class="container-main">
+                                        <img src="${artiste.Image}" alt="nom de l'artiste" class="img">
+                                            <div class="contenue">
+                                                <h1 class="h1">${artiste.Nom}</h1>
+                                                <h3 class="h4">Début de sa carrière : ${artiste.Debutcarriere}</h3>
+                                                <h3 class="h4">Dates de son premier album : ${artiste.Datepremieralbum}</h3>
+                                                <h3 class="h4">Membres: ${artiste.Membres}</h3>
+                                                <h3 class="h4">Localisation de leur prochain/dernier concert: ${artiste.Lieu}</h3>
+                                                <h3 class="h4">Date de leur prochain/dernier concert: ${artiste.Date}</h3>
+                                    </div>
+                                    `;
+                                container.appendChild(div);
+                            });
+                        })
+                }
+            })
+            });
+        }
+        displayAllArtists();
+
+    </script>
 </body>
+
 </html>
