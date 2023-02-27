@@ -39,7 +39,7 @@ func main() {
 	config.AllowOrigins = []string{"*"}
 	router.Use(cors.New(config))
 	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "test.html", gin.H{"artistes": Artistes})
+		c.HTML(http.StatusOK, "index.html", gin.H{"artistes": Artistes})
 	})
 	router.GET("/groupietracker", func(c *gin.Context) {
 		Artistes = SelectArtists(db)
