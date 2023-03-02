@@ -145,7 +145,7 @@ function searchDisplay() {
       searchResults.innerHTML = "Aucun résultat trouvé.";
     } else {
       const container = document.querySelector(".container-main");
-      container.innerHTML = `<h2>${artistes.Nom}</h2>`;
+      container.innerHTML = `<h2>${artiste.Nom}</h2>`;
       searchResults.appendChild(container);
     }
   });
