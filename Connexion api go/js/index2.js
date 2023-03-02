@@ -1,3 +1,4 @@
+//Menu burger
 var burgerMenu = document.getElementById("burger-menu");
 var overlay = document.getElementById("menu");
 burgerMenu.addEventListener("click", function () {
@@ -20,11 +21,6 @@ function displayAllArtists() {
                     <div class="contenue">
                         <img src="${artiste.Image}" alt="${artiste.Nom}" class="img">
                         <h1 class="h1">${artiste.Nom}</h1>
-                        <h4 class="h4">Début de sa carrière : ${artiste.Debutcarriere}</h4>
-                        <h4 class="h4">Date de son premier album : ${artiste.Datepremieralbum}</h4>
-                        <h4 class="h4">${artiste.Membres}</h4>
-                        <h4 class="h4">Localisation de leur prochain/dernier concert: ${artiste.Lieu}</h4>
-                        <h4 class="h4">Date de leur prochain/dernier concert: ${artiste.Date}</h4>
                     </div>
                     </div>
                 </a>
@@ -48,11 +44,6 @@ function displayAllArtistsAsc() {
                     <div class="contenue">
                         <img src="${artiste.Image}" alt="${artiste.Nom}" class="img">
                         <h1 class="h1">${artiste.Nom}</h1>
-                        <h4 class="h4">Début de sa carrière : ${artiste.Debutcarriere}</h4>
-                        <h4 class="h4">Date de son premier album : ${artiste.Datepremieralbum}</h4>
-                        <h4 class="h4">${artiste.Membres}</h4>
-                        <h4 class="h4">Localisation de leur prochain/dernier concert: ${artiste.Lieu}</h4>
-                        <h4 class="h4">Date de leur prochain/dernier concert: ${artiste.Date}</h4>
                     </div>
                     </div>
                 </a>
@@ -76,11 +67,6 @@ function displayAllArtistsDesc() {
                     <div class="contenue">
                         <img src="${artiste.Image}" alt="${artiste.Nom}" class="img">
                         <h1 class="h1">${artiste.Nom}</h1>
-                        <h4 class="h4">Début de sa carrière : ${artiste.Debutcarriere}</h4>
-                        <h4 class="h4">Date de son premier album : ${artiste.Datepremieralbum}</h4>
-                        <h4 class="h4">${artiste.Membres}</h4>
-                        <h4 class="h4">Localisation de leur prochain/dernier concert: ${artiste.Lieu}</h4>
-                        <h4 class="h4">Date de leur prochain/dernier concert: ${artiste.Date}</h4>
                     </div>
                     </div>
                 </a>
@@ -104,11 +90,6 @@ function displayAllArtistsRec() {
                     <div class="contenue">
                         <img src="${artiste.Image}" alt="${artiste.Nom}" class="img">
                         <h1 class="h1">${artiste.Nom}</h1>
-                        <h4 class="h4">Début de sa carrière : ${artiste.Debutcarriere}</h4>
-                        <h4 class="h4">Date de son premier album : ${artiste.Datepremieralbum}</h4>
-                        <h4 class="h4">${artiste.Membres}</h4>
-                        <h4 class="h4">Localisation de leur prochain/dernier concert: ${artiste.Lieu}</h4>
-                        <h4 class="h4">Date de leur prochain/dernier concert: ${artiste.Date}</h4>
                     </div>
                     </div>
                 </a>
@@ -132,11 +113,6 @@ function displayAllArtistsAnc() {
                     <div class="contenue">
                         <img src="${artiste.Image}" alt="${artiste.Nom}" class="img">
                         <h1 class="h1">${artiste.Nom}</h1>
-                        <h4 class="h4">Début de sa carrière : ${artiste.Debutcarriere}</h4>
-                        <h4 class="h4">Date de son premier album : ${artiste.Datepremieralbum}</h4>
-                        <h4 class="h4">${artiste.Membres}</h4>
-                        <h4 class="h4">Localisation de leur prochain/dernier concert: ${artiste.Lieu}</h4>
-                        <h4 class="h4">Date de leur prochain/dernier concert: ${artiste.Date}</h4>
                     </div>
                     </div>
                 </a>
@@ -148,7 +124,7 @@ function displayAllArtistsAnc() {
 
 displayAllArtists();
 
-//************************** */
+//Systeme de recherche
 const searchInput = document.getElementById("search-input");
 const searchResults = document.getElementById("search-results");
 let art = [];
@@ -168,12 +144,9 @@ function searchDisplay() {
     if (art === null) {
       searchResults.innerHTML = "Aucun résultat trouvé.";
     } else {
-      art.forEach((artiste) => {
-        const groupieElement = document.createElement("div");
-        groupieElement.classList.add("groupie");
-        groupieElement.innerHTML = `<h2>${artiste.Nom}</h2>`;
-        searchResults.appendChild(groupieElement);
-      });
+      const container = document.querySelector(".container-main");
+      container.innerHTML = `<h2>${artistes.Nom}</h2>`;
+      searchResults.appendChild(container);
     }
   });
 }
