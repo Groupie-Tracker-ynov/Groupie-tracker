@@ -5,6 +5,7 @@ burgerMenu.addEventListener("click", function () {
   this.classList.toggle("close");
   overlay.classList.toggle("overlay");
 });
+
 // Path: Connexion api go/js/index.js
 function displayAllArtists() {
   fetch("http://localhost:8080/groupietracker")
@@ -171,4 +172,17 @@ document.getElementById('search-input').addEventListener('input', (e)=> {
   search();
 });
 
+<<<<<<< HEAD
+=======
+    searchResults.innerHTML = "";
+    if (art === null) {
+      searchResults.innerHTML = "Aucun résultat trouvé.";
+    } else {
+      const container = document.querySelector(".container-main");
+      container.innerHTML = `<h2>${artiste.Nom}</h2>`;
+      searchResults.appendChild(container);
+    }
+  });
+}
+>>>>>>> 5d85ca38d99d8bcab53716522d71c1ac904661d9
 
