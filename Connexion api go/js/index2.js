@@ -5,6 +5,7 @@ burgerMenu.addEventListener("click", function () {
   this.classList.toggle("close");
   overlay.classList.toggle("overlay");
 });
+
 // Path: Connexion api go/js/index.js
 function displayAllArtists() {
   fetch("http://localhost:8080/groupietracker")

@@ -37,8 +37,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .home {
-    height: 200px;
-    width: 250px;
+    height: 150px;
+    width: 200px;
     cursor: pointer;
     margin-right: 50px;
     margin-top: -50px;
@@ -91,7 +91,6 @@ ul {
     background-color: transparent;
     color: rgb(255, 255, 255);
     border: 1px solid rgb(255, 255, 255);
-
 }
 
 .input-filter:hover {
@@ -114,7 +113,7 @@ a {
 }
 
 .card {
-    height: 600px;
+    height: 500px;
     width: 380px;
     margin-top: 100px;
     margin-left: auto;
@@ -166,9 +165,16 @@ footer {
 }
 
 .titleFooter a {
-    margin-left: 5%;
     cursor: pointer;
 }
+
+.content-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
 
 @media screen and (max-width:1370px) {
 
@@ -187,8 +193,7 @@ footer {
 
     .home {
         margin-right: 0;
-        height: 280px;
-        width: 350px;
+
     }
 
     li {
