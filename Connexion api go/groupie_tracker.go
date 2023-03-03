@@ -50,17 +50,17 @@ func main() {
 		Artistes = Order(db, false)
 		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
 	})
-	router.GET("/groupietracker/artiste/:nom", func(c *gin.Context) {
+	router.GET("/groupietracker/", func(c *gin.Context) {
 		nom := c.Param("nom")
 		artiste := chooseArtist(db, nom)
 		c.JSON(http.StatusOK, gin.H{"artiste": artiste})
 	})
 	router.GET("/groupietracker/rec", func(c *gin.Context) {
-		Artistes = OrderConcert(db, true)
+		Artistes = OrderConcert(db, false)
 		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
 	})
 	router.GET("/groupietracker/anc", func(c *gin.Context) {
-		Artistes = OrderConcert(db, false)
+		Artistes = OrderConcert(db, true)
 		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
 	})
 	router.Run("localhost:8080")
@@ -153,6 +153,7 @@ func OrderConcert(db *sql.DB, flag bool) []Artiste {
 	}
 	defer row.Close()
 	for row.Next() {
+		row.Scan(&str.ID, &str.Nom, &str.Image, &str.Debutcarriere, &str.Datepremieralbum, &str.Membres)
 		row.Scan(&str.ID, &str.Nom, &str.Image, &str.Debutcarriere, &str.Datepremieralbum, &str.Membres)
 		liste = append(liste, str)
 		log.Println("Artistes : ", str.ID, " ", str.Nom, " ", str.Image, " ", str.Debutcarriere, " ", str.Datepremieralbum, " ", str.Membres)
