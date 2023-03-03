@@ -131,7 +131,7 @@ displayAllArtists();
 // let art = [];
 
 // async function recherche(search) {
-//   await fetch(`http://localhost:8080/groupietracker/${search}`)
+//   await fetch(`http://localhost:8080/`)
 //     .then((res) => res.json())
 //     .then((data) => (art = data.art));
 //   console.log(art);
@@ -152,6 +152,7 @@ displayAllArtists();
 //   }});
 // }
 
+<<<<<<< HEAD:Connexion api go/js/index2.js
 function rechercher(artiste) {
   let input = document.getElementById('search-input').value.toLowerCase();
   fetch(`http://localhost:8080/groupietracker/?search=${search}`)
@@ -168,15 +169,31 @@ function rechercher(artiste) {
           x[i].style.display = "search-input";
         
       }
+=======
+function search(artiste) {
+  let input = document.getElementById("search-input").value.toLowerCase();
+  let x = document.getElementsByClassName(`${artiste.Nom}`);
+
+  for (let i = 0; i < x.length; i++) {
+    if (!x[i].innerHTML.toLowerCase().includes(input)) {
+      x[i].style.display = "none";
+    } else {
+      x[i].style.display = "list-item";
+    }
+>>>>>>> 7da37af4f2bd88bd72bab2d2c8ff86c6368477ff:Connexion api go/js/index4.js
   }
 });
 }
 
 // Écouteur d'événements pour appeler la fonction search() lorsque l'utilisateur saisit du texte dans la zone de recherche
-document.getElementById('search-input').addEventListener('input', (e)=> {
+document.getElementById("search-input").addEventListener("input", (e) => {
   e.preventDefault();
   search();
+<<<<<<< HEAD:Connexion api go/js/index2.js
   });
 
 
 
+=======
+});
+>>>>>>> 7da37af4f2bd88bd72bab2d2c8ff86c6368477ff:Connexion api go/js/index4.js
