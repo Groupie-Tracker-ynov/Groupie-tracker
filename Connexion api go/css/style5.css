@@ -37,8 +37,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .home {
-    height: 200px;
-    width: 250px;
+    height: 150px;
+    width: 200px;
     cursor: pointer;
     margin-right: 50px;
     margin-top: -50px;
@@ -91,7 +91,6 @@ ul {
     background-color: transparent;
     color: rgb(255, 255, 255);
     border: 1px solid rgb(255, 255, 255);
-
 }
 
 .input-filter:hover {
@@ -114,9 +113,9 @@ a {
 }
 
 .card {
-    height: 600px;
+    height: 500px;
     width: 380px;
-    margin-top: 100px;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
     padding: 20px;
@@ -151,7 +150,8 @@ a {
 }
 
 .h1 {
-    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-top: 25px;
 }
 
 .h3 {
@@ -163,12 +163,20 @@ footer {
     height: 150px;
     width: 100%;
     padding-top: 40px;
+    margin-top: 45px;
 }
 
 .titleFooter a {
-    margin-left: 5%;
     cursor: pointer;
 }
+
+.content-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
 .container-main-art {
     display: flex;
     justify-content: center;
@@ -191,12 +199,16 @@ footer {
     border-radius: 20px;
 }
 
+.h4 {
+    margin-bottom: 20px;
+}
 .img-art {
     width: 200px;
     height: 200px;
     border-radius: 1500px;
     border: solid 2px;
 }
+
 
 @media screen and (max-width:1370px) {
 
@@ -215,8 +227,7 @@ footer {
 
     .home {
         margin-right: 0;
-        height: 280px;
-        width: 350px;
+
     }
 
     li {
