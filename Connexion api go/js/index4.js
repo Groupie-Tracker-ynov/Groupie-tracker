@@ -131,7 +131,7 @@ displayAllArtists();
 // let art = [];
 
 // async function recherche(search) {
-//   await fetch(`http://localhost:8080/groupietracker/${search}`)
+//   await fetch(`http://localhost:8080/`)
 //     .then((res) => res.json())
 //     .then((data) => (art = data.art));
 //   console.log(art);

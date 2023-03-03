@@ -68,11 +68,11 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"artiste": artiste})
 	})
 	router.GET("/groupietracker/rec", func(c *gin.Context) {
-		Artistes = OrderConcert(db, true)
+		Artistes = OrderConcert(db, false)
 		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
 	})
 	router.GET("/groupietracker/anc", func(c *gin.Context) {
-		Artistes = OrderConcert(db, false)
+		Artistes = OrderConcert(db, true)
 		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
 	})
 
@@ -158,9 +158,9 @@ func Order(db *sql.DB, flag bool) []Artiste {
 func OrderConcert(db *sql.DB, flag bool) []Artiste {
 	var req string
 	if flag {
-		req = "SELECT Artiste.id_art,Artiste.noms,Artiste.image,Artiste.debutcarriere,Artiste.datepremieralbum,Artiste.membres,info_concert.concert_date FROM Artiste INNER JOIN info_concert ON Artiste.id_art = info_concert.id_art ORDER BY concert_date"
+		req = "SELECT * FROM Artiste ORDER BY debutcarriere"
 	} else {
-		req = "SELECT Artiste.id_art,Artiste.noms,Artiste.image,Artiste.debutcarriere,Artiste.datepremieralbum,Artiste.membres,info_concert.concert_date FROM Artiste INNER JOIN info_concert ON Artiste.id_art = info_concert.id_art ORDER BY concert_date DESC"
+		req = "SELECT * FROM Artiste ORDER BY debutcarriere DESC"
 	}
 	var liste []Artiste
 	var str Artiste
@@ -170,7 +170,7 @@ func OrderConcert(db *sql.DB, flag bool) []Artiste {
 	}
 	defer row.Close()
 	for row.Next() {
-		row.Scan(&str.ID, &str.Nom, &str.Image, &str.Debutcarriere, &str.Datepremieralbum, &str.Membres, &str.Date)
+		row.Scan(&str.ID, &str.Nom, &str.Image, &str.Debutcarriere, &str.Datepremieralbum, &str.Membres)
 		liste = append(liste, str)
 		log.Println("Artistes : ", str.ID, " ", str.Nom, " ", str.Image, " ", str.Debutcarriere, " ", str.Datepremieralbum, " ", str.Membres)
 	}
