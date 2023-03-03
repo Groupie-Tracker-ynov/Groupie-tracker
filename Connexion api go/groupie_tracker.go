@@ -47,7 +47,7 @@ func main() {
 	})
 
 	//************************
-	router.GET("/groupietracker/:nom", func(c *gin.Context) {
+	router.GET("/groupietracker/?search=:nom", func(c *gin.Context) {
 		nom := c.Param("nom")
 		Artistes := search(db, nom)
 		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
@@ -62,7 +62,7 @@ func main() {
 		Artistes = Order(db, false)
 		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
 	})
-	router.GET("/groupietracker/artiste/:nom", func(c *gin.Context) {
+	router.GET("/groupietracker/", func(c *gin.Context) {
 		nom := c.Param("nom")
 		artiste := chooseArtist(db, nom)
 		c.JSON(http.StatusOK, gin.H{"artiste": artiste})
@@ -97,7 +97,7 @@ func chooseArtist(db *sql.DB, nom string) Artiste {
 
 func search(db *sql.DB, nom string) Artiste {
 	var str Artiste
-	rows, err := db.Query("SELECT Artiste.id_art,Artiste.noms,Artiste.image,Artiste.debutcarriere,Artiste.datepremieralbum,Artiste.membres,info_concert.concert_date,Lieu.lieu_concert FROM Artiste INNER JOIN info_concert ON Artiste.id_art = info_concert.id_art INNER JOIN Lieu ON Artiste.id_art = Lieu.id_lieu WHERE Artiste.noms = (?);", nom)
+	rows, err := db.Query("SELECT noms FROM Artiste WHERE noms LIKE %(?)%;", nom)
 	if err != nil {
 		log.Println(err)
 	}

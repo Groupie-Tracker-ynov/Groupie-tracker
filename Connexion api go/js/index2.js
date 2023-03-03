@@ -125,31 +125,50 @@ function displayAllArtistsAnc() {
 displayAllArtists();
 
 //Systeme de recherche
-const searchInput = document.getElementById("search-input");
-const searchResults = document.getElementById("search-results");
-let art = [];
+// const searchInput = document.getElementById("search-input");
+// const searchResults = document.getElementById("search-results");
+// let art = [];
 
-async function recherche(search) {
-  await fetch(`http://localhost:8080/groupietracker/${search}`)
-    .then((res) => res.json())
-    .then((data) => (art = data.art));
-  console.log(art);
+// async function recherche(search) {
+//   await fetch(`http://localhost:8080/groupietracker/${search}`)
+//     .then((res) => res.json())
+//     .then((data) => (art = data.art));
+//   console.log(art);
+// }
+
+// function searchDisplay() {
+//   searchInput.addEventListener("input", (e) => {
+//     e.preventDefault();
+
+//     while(searchResults.innerHTML = "") {
+//     if (searchInput === null) {
+//       searchResults.innerHTML = "Aucun résultat trouvé.";
+//     } else{
+//       const container = document.querySelector(".container-main");
+//       container.innerHTML = `<h2>${artiste.Nom}</h2>`;
+//       searchResults.appendChild(container);
+//     }
+//   }});
+// }
+
+function search(artiste) {
+  let input = document.getElementById('search-input').value.toLowerCase();
+  let x = document.getElementsByClassName(` ${artiste.Nom}`);
+
+  for (let i = 0; i < x.length; i++) { 
+      if (!x[i].innerHTML.toLowerCase().includes(input)) {
+          x[i].style.display = "none";
+      }
+      else {
+          x[i].style.display = "list-item";
+      }
+  }
 }
 
-function searchDisplay() {
-  searchInput.addEventListener("input", (e) => {
-    e.preventDefault();
+// Écouteur d'événements pour appeler la fonction search() lorsque l'utilisateur saisit du texte dans la zone de recherche
+document.getElementById('search-input').addEventListener('input', (e)=> {
+  e.preventDefault();
+  search();
+});
 
-    searchResults.innerHTML = "";
-    if (art === null) {
-      searchResults.innerHTML = "Aucun résultat trouvé.";
-    } else {
-      const container = document.querySelector(".container-main");
-      container.innerHTML = `<h2>${artistes.Nom}</h2>`;
-      searchResults.appendChild(container);
-    }
-  });
-}
 
-recherche();
-searchDisplay();
