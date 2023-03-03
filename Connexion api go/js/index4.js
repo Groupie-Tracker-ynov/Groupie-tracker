@@ -1,6 +1,7 @@
 //Menu burger
 var burgerMenu = document.getElementById("burger-menu");
 var overlay = document.getElementById("menu");
+
 burgerMenu.addEventListener("click", function () {
   this.classList.toggle("close");
   overlay.classList.toggle("overlay");
@@ -152,48 +153,25 @@ displayAllArtists();
 //   }});
 // }
 
-<<<<<<< HEAD:Connexion api go/js/index2.js
 function rechercher(artiste) {
-  let input = document.getElementById('search-input').value.toLowerCase();
+  let input = document.getElementById("search-input").value.toLowerCase();
   fetch(`http://localhost:8080/groupietracker/?search=${search}`)
     .then((res) => res.json())
     .then((data) => {
+      let x = document.getElementsByClassName(`${artiste.Nom}`);
 
-  let x = document.getElementsByClassName(`${artiste.Nom}`);
-
-  for (let i = 0; i < x.length; i++) { 
-      if (!x[i].innerHTML.toLowerCase().includes(input)) {
+      for (let i = 0; i < x.length; i++) {
+        if (!x[i].innerHTML.toLowerCase().includes(input)) {
           x[i].style.display = "none";
-      }
-      else {
+        } else {
           x[i].style.display = "search-input";
-        
+        }
       }
-=======
-function search(artiste) {
-  let input = document.getElementById("search-input").value.toLowerCase();
-  let x = document.getElementsByClassName(`${artiste.Nom}`);
-
-  for (let i = 0; i < x.length; i++) {
-    if (!x[i].innerHTML.toLowerCase().includes(input)) {
-      x[i].style.display = "none";
-    } else {
-      x[i].style.display = "list-item";
-    }
->>>>>>> 7da37af4f2bd88bd72bab2d2c8ff86c6368477ff:Connexion api go/js/index4.js
-  }
-});
+    });
 }
 
 // Écouteur d'événements pour appeler la fonction search() lorsque l'utilisateur saisit du texte dans la zone de recherche
 document.getElementById("search-input").addEventListener("input", (e) => {
   e.preventDefault();
   search();
-<<<<<<< HEAD:Connexion api go/js/index2.js
-  });
-
-
-
-=======
 });
->>>>>>> 7da37af4f2bd88bd72bab2d2c8ff86c6368477ff:Connexion api go/js/index4.js
