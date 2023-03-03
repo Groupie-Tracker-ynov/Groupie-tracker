@@ -153,36 +153,20 @@ displayAllArtists();
 // }
 
 function search(artiste) {
-  let input = document.getElementById('search-input').value.toLowerCase();
-  let x = document.getElementsByClassName(` ${artiste.Nom}`);
+  let input = document.getElementById("search-input").value.toLowerCase();
+  let x = document.getElementsByClassName(`${artiste.Nom}`);
 
-  for (let i = 0; i < x.length; i++) { 
-      if (!x[i].innerHTML.toLowerCase().includes(input)) {
-          x[i].style.display = "none";
-      }
-      else {
-          x[i].style.display = "list-item";
-      }
+  for (let i = 0; i < x.length; i++) {
+    if (!x[i].innerHTML.toLowerCase().includes(input)) {
+      x[i].style.display = "none";
+    } else {
+      x[i].style.display = "list-item";
+    }
   }
 }
 
 // Écouteur d'événements pour appeler la fonction search() lorsque l'utilisateur saisit du texte dans la zone de recherche
-document.getElementById('search-input').addEventListener('input', (e)=> {
+document.getElementById("search-input").addEventListener("input", (e) => {
   e.preventDefault();
   search();
 });
-
-<<<<<<< HEAD
-=======
-    searchResults.innerHTML = "";
-    if (art === null) {
-      searchResults.innerHTML = "Aucun résultat trouvé.";
-    } else {
-      const container = document.querySelector(".container-main");
-      container.innerHTML = `<h2>${artiste.Nom}</h2>`;
-      searchResults.appendChild(container);
-    }
-  });
-}
->>>>>>> 5d85ca38d99d8bcab53716522d71c1ac904661d9
-
