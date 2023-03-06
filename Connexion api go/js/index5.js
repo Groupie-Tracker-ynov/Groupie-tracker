@@ -223,7 +223,7 @@ function displayArtistById(id) {
         console.error("Could not find .concert element");
         return;
       }
-      container2.innerHTML = "<h2 class='h4'>Concert</h2>";
+      container2.innerHTML = "<h2 class='h4'>Concerts</h2>";
       if (!data.artiste.Dates) {
         console.error("No concert dates found");
         return;
@@ -242,8 +242,7 @@ displayAllArtists();
 //Systeme de recherche
 function search(artiste) {
   let input = document.getElementById("search-input").value.toLowerCase();
-  let x = document.getElementsByClassName(`${artiste.Nom}`);
-  fetch(`http://localhost:8080/groupietracker/?search=${search}`)
+  fetch(`http://localhost:8080/groupietracker/?search=${input}`)
     .then((res) => res.json())
     .then((data) => {
       let x = document.getElementsByClassName(`${artiste.Nom}`);
