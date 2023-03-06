@@ -238,6 +238,8 @@ function displayArtistById(id) {
 }
 
 displayAllArtists();
+
+//Systeme de recherche
 function search(artiste) {
   let input = document.getElementById("search-input").value.toLowerCase();
   let x = document.getElementsByClassName(`${artiste.Nom}`);
