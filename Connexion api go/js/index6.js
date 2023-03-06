@@ -240,22 +240,24 @@ function displayArtistById(id) {
 displayAllArtists();
 
 //Systeme de recherche
-function search(artiste) {
-  let input = document.getElementById("search-input").value.toLowerCase();
+function search() {
+  const input = document.getElementById("search-input").value.toLowerCase();
   fetch(`http://localhost:8080/groupietracker/?search=${input}`)
     .then((res) => res.json())
     .then((data) => {
-      let x = document.getElementsByClassName(`${artiste.Nom}`);
-
-      for (let i = 0; i < x.length; i++) {
-        if (!x[i].innerHTML.toLowerCase().includes(input)) {
-          x[i].style.display = "none";
-        } else {
-          x[i].style.display = "list-item";
-          x[i].style.display = "search-input";
+      const artistes = data.artistes;
+      for (const artiste of artistes) {
+        const x = document.getElementsByClassName(`${artiste.Nom}`);
+        for (let i = 0; i < x.length; i++) {
+          if (!x[i].innerHTML.toLowerCase().includes(input)) {
+            x[i].style.display = "none";
+          } else {
+            x[i].style.display = "list-item";
+          }
         }
       }
-    });
+    })
+    .catch((error) => console.log(error));
 }
 
 // Écouteur d'événements pour appeler la fonction search() lorsque l'utilisateur saisit du texte dans la zone de recherche
