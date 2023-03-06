@@ -212,8 +212,8 @@ function displayArtistById(id) {
                 <h3 class="h4">Début de sa carrière : ${data.artiste.Debutcarriere}</h3>
                 <h3 class="h4">Date de son premier album : ${data.artiste.Datepremieralbum}</h3>
                 <h3 class="h4">Membres: ${data.artiste.Membres}</h3>
-                <h3 class="h4">Localisation de leur prochain/dernier concert: ${data.artiste.Date}</h3>
-                <h3 class="h4">Date de leur prochain/dernier concert: ${data.artiste.Lieu}</h3>
+                <h3 class="h4">Localisation de leur prochain/dernier concert: ${data.artiste.Lieu}</h3>
+                <h3 class="h4">Date de leur prochain/dernier concert: ${data.artiste.Date}</h3>
             </div>
         `;
       const container2 = document.createElement("div");
