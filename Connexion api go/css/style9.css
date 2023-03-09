@@ -17,14 +17,10 @@ body::-webkit-scrollbar {
     width: 10px;
 }
 
-body::-webkit-scrollbar-track {
-    background: transparent;
-}
-
 body::-webkit-scrollbar-thumb {
     background-color: rgb(53, 53, 53);
     border-radius: 20px;
-    border: 2px solid rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
 }
 
 
