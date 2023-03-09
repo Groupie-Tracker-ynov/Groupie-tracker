@@ -158,6 +158,10 @@ a {
     padding-bottom: 10px;
 }
 
+.h2 {
+    text-align: center;
+}
+
 footer {
     background-color: rgb(29, 29, 29);
     height: 110%;
@@ -383,3 +387,6 @@ footer {
         transform: translateX(0);
     }
 }
+
+
+    
