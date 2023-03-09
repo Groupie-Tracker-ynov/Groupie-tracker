@@ -240,49 +240,99 @@ function displayArtistById(id) {
 displayAllArtists();
 
 //Systeme de recherche
-function search() {
-  const input = document.getElementById("search-input").value.toLowerCase();
+// function search() {
+//   const input = document.getElementById("search-input").value.toLowerCase();
 
-  // Effectuer une requête à l'API pour obtenir les données sur les artistes et les groupies
-  fetch(`http://localhost:8080/groupietracker/?search=${input}`)
-    .then((res) => res.json())
-    .then((data) => {
-      const artistes = data.artistes;
-      const groupies = data.groupies;
+//   // Effectuer une requête à l'API pour obtenir les données sur les artistes et les groupies
+//   fetch(`http://localhost:8080/groupietracker/?search=${input}`)
+//     .then((res) => res.json())
+//     .then((data) => {
+//       const artistes = data.artistes;
+//       const groupies = data.groupies;
 
-      // Créer une liste de résultats pour les artistes
-      const artistList = document.getElementById("artist-list");
-      artistList.innerHTML = "";
-      for (const artiste of artistes) {
-        const x = document.createElement("li");
-        x.className = artiste.Nom.toLowerCase();
-        x.innerHTML = artiste.Nom;
-        artistList.appendChild(x);
-      }
+//       // Créer une liste de résultats pour les artistes
+//       const artistList = document.getElementById("artist-list");
+//       artistList.innerHTML = "";
+//       for (const artiste of artistes) {
+//         const x = document.createElement("li");
+//         x.className = artiste.Nom.toLowerCase();
+//         x.innerHTML = artiste.Nom;
+//         artistList.appendChild(x);
+//       }
 
-      // Afficher les groupies correspondants à la recherche pour chaque artiste
-      for (const artiste of artistes) {
-        const groupieList = document.getElementsByClassName(
-          `${artiste.Nom.toLowerCase()}-groupies`
-        )[0];
-        groupieList.innerHTML = "";
-        for (const groupie of groupies) {
-          if (
-            groupie.Artiste === artiste.Nom &&
-            groupie.Nom.toLowerCase().includes(input)
-          ) {
-            const x = document.createElement("li");
-            x.innerHTML = groupie.Nom;
-            groupieList.appendChild(x);
-          }
-        }
-      }
-    })
-    .catch((error) => console.log(error));
+//       // Afficher les groupies correspondants à la recherche pour chaque artiste
+//       for (const artiste of artistes) {
+//         const groupieList = document.getElementsByClassName(
+//           `${artiste.Nom.toLowerCase()}-groupies`
+//         )[0];
+//         groupieList.innerHTML = "";
+//         for (const groupie of groupies) {
+//           if (
+//             groupie.Artiste === artiste.Nom &&
+//             groupie.Nom.toLowerCase().includes(input)
+//           ) {
+//             const x = document.createElement("li");
+//             x.innerHTML = groupie.Nom;
+//             groupieList.appendChild(x);
+//           }
+//         }
+//       }
+//     })
+//     .catch((error) => console.log(error));
+// }
+
+// // Écouteur d'événements pour appeler la fonction search() lorsque l'utilisateur saisit du texte dans la zone de recherche
+// document.getElementById("search-input").addEventListener("input", (e) => {
+//   e.preventDefault();
+//   search();
+// });
+
+const endpoint = "http://localhost:8080/groupietracker";
+const artistes = [];
+fetch(endpoint)
+  .then((blob) => blob.json())
+  .then((data) => artistes.push(...data.artistes));
+
+function findMatches(wordToMatch, artists) {
+  return artists.filter((artist) => {
+    const regex = new RegExp(wordToMatch, "gi");
+    return artist.Nom.match(regex);
+  });
 }
 
-// Écouteur d'événements pour appeler la fonction search() lorsque l'utilisateur saisit du texte dans la zone de recherche
-document.getElementById("search-input").addEventListener("input", (e) => {
-  e.preventDefault();
-  search();
-});
+function displayMatches() {
+  const matchArray = findMatches(this.value, artistes);
+  const html = matchArray
+    .map((artist) => {
+      const artistName = artist.Nom;
+      const artistid = artist.ID;
+      const artistImage = artist.Image;
+      return `
+          <a href="#" class="cards" data-id="${artistid}">
+            <div class="card">
+              <div class="back-img" style="background: no-repeat url('${artistImage}') center;"></div>
+              <div class="contenue">
+                <img src="${artistImage}" alt="${artistName}" class="img">
+                <h1 class="h1">${artistName}</h1>
+              </div>
+            </div>
+          </a>
+        `;
+    })
+    .join("");
+  suggestions.innerHTML = html;
+  const myLink = document.querySelectorAll(".cards");
+  myLink.forEach((element) => {
+    element.addEventListener("click", function (event) {
+      event.preventDefault();
+      const artisteId = this.getAttribute("data-id");
+      displayArtistById(artisteId);
+    });
+  });
+}
+
+const searchInput = document.querySelector(".-search");
+const suggestions = document.querySelector(".container-main");
+
+searchInput.addEventListener("change", displayMatches);
+searchInput.addEventListener("keyup", displayMatches);
