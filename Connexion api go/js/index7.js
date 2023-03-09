@@ -276,6 +276,7 @@ function displayMatches() {
   if (html == "") {
     search.innerHTML = `<h2 class="h2">Aucun résultat</h2>`;
     search.style.opacity = "1";
+    suggestions.innerHTML = "";
   } else {
     suggestions.innerHTML = html;
     search.style.opacity = "0";
