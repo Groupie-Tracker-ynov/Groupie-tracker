@@ -110,8 +110,6 @@ func SelectArtists(db *sql.DB) []Artiste {
 	return liste
 }
 
-// *******************************************************************************
-
 func NbLigne(db *sql.DB) int {
 	var count int
 	err := db.QueryRow("SELECT COUNT(*) FROM Artiste").Scan(&count)
@@ -121,8 +119,6 @@ func NbLigne(db *sql.DB) int {
 	log.Println(count)
 	return count
 }
-
-//*******************************************************************************
 
 func Order(db *sql.DB, flag bool) []Artiste {
 	var req string
