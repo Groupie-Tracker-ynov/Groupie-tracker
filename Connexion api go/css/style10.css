@@ -66,10 +66,6 @@ body::-webkit-scrollbar-thumb {
     width: 350px;
 }
 
-.-search:hover {
-    transform: scale(1.1);
-}
-
 ul {
     display: flex;
     justify-content: center;
@@ -80,7 +76,6 @@ ul {
     height: 40px;
     width: 172px;
     border-radius: 20px;
-    padding-left: 10px;
     margin-right: 20px;
     cursor: pointer;
     transition: 0.2s ease-in-out;

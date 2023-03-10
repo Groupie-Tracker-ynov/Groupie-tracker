@@ -63,13 +63,6 @@ func main() {
 		Artistes = OrderConcert(db, true)
 		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
 	})
-	//******************************************
-	router.GET("/groupietracker/?search=:nom", func(c *gin.Context) {
-		nom := c.Param("nom")
-		Artistes := search(db, nom)
-		c.JSON(http.StatusOK, gin.H{"artistes": Artistes})
-	})
-	//******************************************
 	router.Run("localhost:8080")
 
 }
@@ -116,6 +109,9 @@ func SelectArtists(db *sql.DB) []Artiste {
 	}
 	return liste
 }
+
+// *******************************************************************************
+
 func NbLigne(db *sql.DB) int {
 	var count int
 	err := db.QueryRow("SELECT COUNT(*) FROM Artiste").Scan(&count)
@@ -125,6 +121,9 @@ func NbLigne(db *sql.DB) int {
 	log.Println(count)
 	return count
 }
+
+//*******************************************************************************
+
 func Order(db *sql.DB, flag bool) []Artiste {
 	var req string
 	if flag {
@@ -166,18 +165,4 @@ func OrderConcert(db *sql.DB, flag bool) []Artiste {
 		log.Println("Artistes : ", str.ID, " ", str.Nom, " ", str.Image, " ", str.Debutcarriere, " ", str.Datepremieralbum, " ", str.Membres)
 	}
 	return liste
-}
-
-func search(db *sql.DB, nom string) Artiste {
-	var str Artiste
-	rows, err := db.Query("SELECT noms FROM Artiste WHERE noms LIKE %(?)%;", nom)
-	if err != nil {
-		log.Println(err)
-	}
-	defer rows.Close()
-	for rows.Next() {
-		rows.Scan(&str.ID, &str.Nom, &str.Image, &str.Debutcarriere, &str.Datepremieralbum, &str.Membres, &str.Date, &str.Lieu)
-	}
-	log.Println("Artistes : ", str.ID, " ", str.Nom, " ", str.Image, " ", str.Debutcarriere, " ", str.Datepremieralbum, " ", str.Membres, " ", str.Date, " ", str.Lieu)
-	return str
 }
