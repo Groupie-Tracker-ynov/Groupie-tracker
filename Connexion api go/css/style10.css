@@ -143,6 +143,11 @@ a {
 .h1 {
     margin-bottom: 20px;
     margin-top: 25px;
+    font-family: 'Fredoka One', cursive;
+}
+
+h2 {
+    font-family: 'Fredoka One', cursive;
 }
 
 .h3 {
