@@ -5,17 +5,20 @@ burgerMenu.addEventListener("click", function () {
   this.classList.toggle("close");
   overlay.classList.toggle("overlay");
 });
-url = "http://localhost:8080/api/groupietracker"
-displayAllArtists(url);                                    //Affiche tous les artistes au lancement de la page html
-function displayAllArtists(url) {                          //Fonction qui affiche tous les artistes
-  fetch(url)                                               //Récupère les information envoyés à cette URI
+
+url = "http://localhost:8080/api/groupietracker";
+displayAllArtists(url); //Affiche tous les artistes au lancement de la page html
+function displayAllArtists(url) {
+  //Fonction qui affiche tous les artistes
+  fetch(url) //Récupère les information envoyés à cette URI
     .then((res) => res.json())
     .then((data) => {
       document.querySelector(".container-main-art").innerHTML = "";
       const container = document.querySelector(".container-main");
       console.log(data.artistes);
       container.innerHTML = "";
-      data.artistes.forEach((artiste) => {                     //parcours tous les artistes et affiche une "card" pour chacun d'eux
+      data.artistes.forEach((artiste) => {
+        //parcours tous les artistes et affiche une "card" pour chacun d'eux
         const div = document.createElement("div");
         div.innerHTML = `
                 <a href="#" class="cards" data-id="${artiste.ID}">
@@ -32,7 +35,8 @@ function displayAllArtists(url) {                          //Fonction qui affich
       });
       const myLink = document.querySelectorAll(".cards");
       myLink.forEach((element) => {
-        element.addEventListener("click", function (event) {          //Empêche le href d'êre actif et lancr la fonction "displayArtistBYId" à la place
+        element.addEventListener("click", function (event) {
+          //Empêche le href d'êre actif et lancer la fonction "displayArtistBYId" à la place
           event.preventDefault();
           const artisteId = this.getAttribute("data-id");
           displayArtistById(artisteId);
@@ -40,7 +44,8 @@ function displayAllArtists(url) {                          //Fonction qui affich
       });
     });
 }
-function displayArtistById(id) {                                              //affiche un seul artiste en fonction de son ID
+function displayArtistById(id) {
+  //affiche un seul artiste en fonction de son ID
   fetch(`http://localhost:8080/api/groupietracker/artiste/${id}`)
     .then((res) => res.json())
     .then((data) => {
@@ -84,7 +89,8 @@ fetch(endpoint)
   .then((blob) => blob.json())
   .then((data) => artistes.push(...data.artistes));
 
-function findMatches(wordToMatch, artists) {                  //effectue la recherche en fonction de la chaîne de caractère dans la barre de recherche
+function findMatches(wordToMatch, artists) {
+  //effectue la recherche en fonction de la chaîne de caractère dans la barre de recherche
   return artists.filter((artist) => {
     const regex = new RegExp(wordToMatch, "gi");
     return artist.Nom.match(regex);
@@ -93,7 +99,7 @@ function findMatches(wordToMatch, artists) {                  //effectue la rech
 
 function displayMatches() {
   const matchArray = findMatches(this.value, artistes);
-  const html = matchArray                                     //affiche les résulats de la recherche
+  const html = matchArray //affiche les résulats de la recherche
     .map((artist) => {
       const artistName = artist.Nom;
       const artistid = artist.ID;
@@ -127,19 +133,19 @@ const suggestions = document.querySelector(".container-main");
 
 searchInput.addEventListener("change", displayMatches);
 searchInput.addEventListener("keyup", displayMatches);
-function displayAllArtistsAsc(){
+function displayAllArtistsAsc() {
   url = "http://localhost:8080/api/groupietracker/asc";
-  displayAllArtists(url);                                  //Affiche les artistes dans l'ordre alphabétique
+  displayAllArtists(url); //Affiche les artistes dans l'ordre alphabétique
 }
-function displayAllArtistsDesc(){
+function displayAllArtistsDesc() {
   url = "http://localhost:8080/api/groupietracker/desc";
-  displayAllArtists(url);                                  //Affiche les artistes dans l'ordre anti-alphabétique
+  displayAllArtists(url); //Affiche les artistes dans l'ordre anti-alphabétique
 }
-function displayAllArtistsAnc(){
+function displayAllArtistsAnc() {
   url = "http://localhost:8080/api/groupietracker/anc";
-  displayAllArtists(url);                                  //Affiche les artistes dans l'ordre décroissant de l'année du début de carrière
+  displayAllArtists(url); //Affiche les artistes dans l'ordre décroissant de l'année du début de carrière
 }
-function displayAllArtistsRec(){
+function displayAllArtistsRec() {
   url = "http://localhost:8080/api/groupietracker/rec";
-  displayAllArtists(url);                                 //Affiche les artistes dans l'ordre croissant de l'année du début de carrière
+  displayAllArtists(url); //Affiche les artistes dans l'ordre croissant de l'année du début de carrière
 }
