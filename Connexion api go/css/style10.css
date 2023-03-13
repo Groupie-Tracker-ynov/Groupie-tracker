@@ -144,10 +144,13 @@ a {
     margin-bottom: 20px;
     margin-top: 25px;
     font-family: 'Fredoka One', cursive;
+    letter-spacing: 2px;
 }
 
 h2 {
     font-family: 'Fredoka One', cursive;
+    letter-spacing: 2px;
+
 }
 
 .h3 {
