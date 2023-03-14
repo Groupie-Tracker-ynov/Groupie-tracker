@@ -6,10 +6,14 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: rgb(255, 255, 255);
-    background-color: rgb(53, 53, 53);
+    background-color: rgb(53,53,53);
     overflow-x: hidden;
 }
 
@@ -23,26 +27,16 @@ body::-webkit-scrollbar-thumb {
     border: 1px solid rgb(255, 255, 255);
 }
 
-
 .container-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    margin-top: 50px;
-    margin-right: 80px;
-}
-
-.home {
-    height: 150px;
-    width: 200px;
-    cursor: pointer;
-    margin-right: 50px;
-    margin-top: -50px;
-}
-
-.search {
+    padding: 25px;
+    visibility: hidden;
+    transition: 0.5s ease-in-out;
+    z-index: 999;
+    position: fixed;
+    background-color: rgb(29, 29, 29);    
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .-search {
@@ -66,10 +60,14 @@ body::-webkit-scrollbar-thumb {
     width: 350px;
 }
 
+.home {
+    height: 150px;
+    width: 200px;
+    cursor: pointer;
+}
+
 ul {
     display: flex;
-    justify-content: center;
-    flex-direction: row; 
 }
 
 .input-filter {
@@ -92,9 +90,81 @@ ul {
     list-style:none;
   }
 
+  .presentation {
+    text-align: center;
+    align-items: center;
+    margin-top: 80px;
+}
+
+.animTexth1 {
+    font-family: 'Fredoka One', cursive;
+    overflow: hidden;
+    font-size: 5vw;
+    letter-spacing: 2px;
+}
+
+.animText {
+    margin-top: 100px;
+    overflow: hidden;
+
+}
+
+.span1 {   
+    display: inline-block;
+    animation: rideau 0.7s ease-in-out;
+    width: 650px;
+}
+
+.span2 {
+    display: inline-block;
+    animation: reverseRideau 0.9s ease-in-out;
+    width: 600px;
+}
+
+.content-btn {
+    margin-top: 50px;
+}
+
+.content-btn p {
+    margin-bottom: 20px;
+}
+
+.start {
+    padding: 10px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.start:hover {
+    transform: scale(1.1);
+}
+
+@keyframes rideau {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+       transform: translate(0);
+    }
+}
+
+@keyframes reverseRideau {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translate(0);
+    }
+}
+
 .container-main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 400px;
 }
 
 a {
@@ -167,11 +237,11 @@ footer {
     width: 100%;
     padding-top: 40px;
     padding-bottom: 20px;
-    margin-top: 90px;
 }
 
 .titleFooter a {
     cursor: pointer;
+    font-family: 'Fredoka One', cursive; 
 }
 
 .content-footer {
@@ -184,7 +254,7 @@ footer {
 .container-main-art {
     display: flex;
     justify-content: center;
-    margin-top: 100px
+    margin-bottom: 200px;
 }
 
 .contenue-art {
@@ -206,18 +276,23 @@ footer {
 .h4 {
     margin-bottom: 20px;
 }
+
 .img-art {
     width: 200px;
     height: 200px;
     border-radius: 1500px;
     border: solid 2px;
+    cursor: pointer;
 }
 
 
 @media screen and (max-width:1370px) {
 
     .container-header {
-        justify-content: space-between;
+        margin: 0;
+        background-color: transparent;    
+        display: block;
+     
     }
 
     .filter {
@@ -240,10 +315,6 @@ footer {
 
     .burger-menu {
         margin-left: 50px;
-    }
-
-    .-search {
-        margin-right: 50px;
     }
 
     #burger-menu {

@@ -6,6 +6,21 @@ burgerMenu.addEventListener("click", function () {
   overlay.classList.toggle("overlay");
 });
 
+//effet scroll bar
+let scrollValue =
+  (window.scrollY + window.innerHeight) / document.body.offsetHeight;
+const navBar = document.querySelector(".container-header");
+
+window.addEventListener("scroll", () => {
+  if (scrollValue > window.scrollY) {
+    navBar.style.top = "0px";
+    navBar.style.visibility = "visible";
+  } else {
+    navBar.style.top = "-100px";
+  }
+  scrollValue = window.scrollY;
+});
+
 url = "http://localhost:8080/api/groupietracker";
 displayAllArtists(url); //Affiche tous les artistes au lancement de la page html
 function displayAllArtists(url) {
@@ -15,14 +30,24 @@ function displayAllArtists(url) {
     .then((data) => {
       document.querySelector(".container-main-art").innerHTML = "";
       const container = document.querySelector(".container-main");
+      const presentation = document.querySelector(".presentation");
+      presentation.innerHTML = `
+                    <a href="http://localhost:8080/groupietracker"><img class="home" src="../img/logo.png" alt=""></a>
+                    <a href="http://localhost:8080/groupietracker"><h1 class="animTexth1"><span class="span1">Groupie-Tracker</span></h1></a>
+                    <p class="animText"><span class="span2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, doloremque voluptates voluptatibus quibusdam explicabo adipisci ratione, commodi excepturi deserunt omnis obcaecati magni ipsum esse, aliquid nemo et odio libero sunt!</span></p>
+                    <div class="content-btn">
+                      <p>Pour commencer a voir vos artiste prefere</p>
+                      <a id="suivant" class="start" href="#cards">Cliquez ici</a>
+                    </div>
+          `;
       console.log(data.artistes);
       container.innerHTML = "";
       data.artistes.forEach((artiste) => {
         //parcours tous les artistes et affiche une "card" pour chacun d'eux
         const div = document.createElement("div");
         div.innerHTML = `
-                <a href="#" class="cards" data-id="${artiste.ID}">
-                    <div class="card">
+                <a href="#" class="cards" id="cards" data-id="${artiste.ID}">
+                    <div class="card" >
                     <div class="back-img" style="background: no-repeat url('${artiste.Image}') center;"></div>
                     <div class="contenue">
                         <img src="${artiste.Image}" alt="${artiste.Nom}" class="img">
@@ -50,9 +75,13 @@ function displayArtistById(id) {
     .then((res) => res.json())
     .then((data) => {
       document.querySelector(".container-main").innerHTML = "";
+      document.querySelector(".presentation").innerHTML = "";
+      const navBar = document.querySelector(".container-header");
+      navBar.style.visibility = "visible";
+      navBar.style.top = "20px";
       const container = document.querySelector(".container-main-art");
       container.innerHTML = `
-            <img src="${data.artiste.Image}" alt="nom de l'artiste" class="img-art">
+      <a href="http://localhost:8080/groupietracker"><img src="${data.artiste.Image}" alt="nom de l'artiste" class="img-art"></a>
             <div class="contenue-art">
                 <h1 class="h1">${data.artiste.Nom}</h1>
                 <h3 class="h4">Début de sa carrière : ${data.artiste.Debutcarriere}</h3>
@@ -100,12 +129,14 @@ function findMatches(wordToMatch, artists) {
 function displayMatches() {
   const matchArray = findMatches(this.value, artistes);
   const html = matchArray //affiche les résulats de la recherche
+
     .map((artist) => {
+      document.querySelector(".presentation").innerHTML = "";
       const artistName = artist.Nom;
       const artistid = artist.ID;
       const artistImage = artist.Image;
       return `
-          <a href="#" class="cards" data-id="${artistid}">
+          <a href="#" class="cards" id="cards" data-id="${artistid}">
             <div class="card">
               <div class="back-img" style="background: no-repeat url('${artistImage}') center;"></div>
               <div class="contenue">
@@ -117,6 +148,18 @@ function displayMatches() {
         `;
     })
     .join("");
+  const main = document.querySelector(".container-main");
+  main.style.margintop = "-600px";
+
+  if (html == "") {
+    search.innerHTML = `<h2 class="h2">Aucun résultat</h2>`;
+    search.style.opacity = "1";
+    suggestions.innerHTML = "";
+  } else {
+    suggestions.innerHTML = html;
+    search.style.opacity = "0";
+  }
+
   suggestions.innerHTML = html;
   const myLink = document.querySelectorAll(".cards");
   myLink.forEach((element) => {
@@ -130,9 +173,11 @@ function displayMatches() {
 
 const searchInput = document.querySelector(".-search");
 const suggestions = document.querySelector(".container-main");
+const search = document.querySelector(".noResult");
 
 searchInput.addEventListener("change", displayMatches);
 searchInput.addEventListener("keyup", displayMatches);
+
 function displayAllArtistsAsc() {
   url = "http://localhost:8080/api/groupietracker/asc";
   displayAllArtists(url); //Affiche les artistes dans l'ordre alphabétique
