@@ -6,11 +6,12 @@ burgerMenu.addEventListener("click", function () {
   overlay.classList.toggle("overlay");
 });
 
-//effet scroll bar
+//Valeur effet scroll bar
 let scrollValue =
   (window.scrollY + window.innerHeight) / document.body.offsetHeight;
 const navBar = document.querySelector(".container-header");
 
+//Fonction qui permet de faire disparaitre la barre de navigation en scrollant vers le bas
 window.addEventListener("scroll", () => {
   if (scrollValue > window.scrollY) {
     navBar.style.top = "0px";
@@ -32,11 +33,11 @@ function displayAllArtists(url) {
       const container = document.querySelector(".container-main");
       const presentation = document.querySelector(".presentation");
       presentation.innerHTML = `
-                    <a href="http://localhost:8080/groupietracker"><img class="home" src="../img/logo.png" alt=""></a>
+                    <a href="http://localhost:8080/groupietracker"><img class="home" src="../img/logo.png" alt="logo"></a>
                     <a href="http://localhost:8080/groupietracker"><h1 class="animTexth1"><span class="span1">Groupie-Tracker</span></h1></a>
-                    <p class="animText"><span class="span2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, doloremque voluptates voluptatibus quibusdam explicabo adipisci ratione, commodi excepturi deserunt omnis obcaecati magni ipsum esse, aliquid nemo et odio libero sunt!</span></p>
+                    <p class="animText"><span class="span2">Bienvenue sur Groupie Tracker, votre guide ultime pour suivre toute les actualite sur vos chanteurs préférés ! Rejoignez notre communauté de fans passionnés et explorez notre site pour découvrir les dernières nouvelles et bien plus encore.</span></p>
                     <div class="content-btn">
-                      <p>Pour commencer a voir vos artiste prefere</p>
+                      <p>Pour commencer a decouvrir vos artiste prefere</p>
                       <a id="suivant" class="start" href="#cards">Cliquez ici</a>
                     </div>
           `;
@@ -77,8 +78,9 @@ function displayArtistById(id) {
       document.querySelector(".container-main").innerHTML = "";
       document.querySelector(".presentation").innerHTML = "";
       const navBar = document.querySelector(".container-header");
+      const body = document.querySelector("body");
+      body.style.overflow = "hidden";
       navBar.style.visibility = "visible";
-      navBar.style.top = "20px";
       const container = document.querySelector(".container-main-art");
       container.innerHTML = `
       <a href="http://localhost:8080/groupietracker"><img src="${data.artiste.Image}" alt="nom de l'artiste" class="img-art"></a>
@@ -112,6 +114,7 @@ function displayArtistById(id) {
     });
 }
 
+//systeme de recherche
 const endpoint = "http://localhost:8080/api/groupietracker";
 const artistes = [];
 fetch(endpoint)
@@ -149,15 +152,20 @@ function displayMatches() {
     })
     .join("");
   const main = document.querySelector(".container-main");
+  const body = document.querySelector("body");
+
   main.style.margintop = "-600px";
 
+  //conditon pour afficher un message si aucun résultat n'est trouvé
   if (html == "") {
     search.innerHTML = `<h2 class="h2">Aucun résultat</h2>`;
     search.style.opacity = "1";
     suggestions.innerHTML = "";
+    body.style.overflow = "hidden";
   } else {
     suggestions.innerHTML = html;
     search.style.opacity = "0";
+    body.style.overflow = "visible";
   }
 
   suggestions.innerHTML = html;
@@ -175,6 +183,7 @@ const searchInput = document.querySelector(".-search");
 const suggestions = document.querySelector(".container-main");
 const search = document.querySelector(".noResult");
 
+//écoute les événements de la barre de recherche
 searchInput.addEventListener("change", displayMatches);
 searchInput.addEventListener("keyup", displayMatches);
 
