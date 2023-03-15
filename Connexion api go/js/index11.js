@@ -21,7 +21,7 @@ window.addEventListener("scroll", () => {
   }
   scrollValue = window.scrollY;
 });
-
+let flag=true;
 url = "http://localhost:8080/api/groupietracker";
 displayAllArtists(url); //Affiche tous les artistes au lancement de la page html
 function displayAllArtists(url) {
@@ -32,15 +32,19 @@ function displayAllArtists(url) {
       document.querySelector(".container-main-art").innerHTML = "";
       const container = document.querySelector(".container-main");
       const presentation = document.querySelector(".presentation");
-      presentation.innerHTML = `
-                    <a href="http://localhost:8080/groupietracker"><img class="home" src="../img/logo.png" alt="logo"></a>
-                    <a href="http://localhost:8080/groupietracker"><h1 class="animTexth1"><span class="span1">Groupie-Tracker</span></h1></a>
-                    <p class="animText"><span class="span2">Bienvenue sur Groupie Tracker, votre guide ultime pour suivre toute les actualite sur vos chanteurs préférés ! Rejoignez notre communauté de fans passionnés et explorez notre site pour découvrir les dernières nouvelles et bien plus encore.</span></p>
-                    <div class="content-btn">
-                      <p>Pour commencer a decouvrir vos artiste prefere</p>
-                      <a id="suivant" class="start" href="#cards">Cliquez ici</a>
-                    </div>
-          `;
+      presentation.innerHTML="";
+      if (flag){
+        presentation.innerHTML = `
+                      <a href="http://localhost:8080/groupietracker"><img class="home" src="../img/logo.png" alt="logo"></a>
+                      <a href="http://localhost:8080/groupietracker"><h1 class="animTexth1"><span class="span1">Groupie-Tracker</span></h1></a>
+                      <p class="animText"><span class="span2">Bienvenue sur Groupie Tracker, votre guide ultime pour suivre toute les actualités sur vos chanteurs préférés ! Rejoignez notre communauté de fans passionnés et explorez notre site pour découvrir les dernières nouvelles et bien plus encore.</span></p>
+                      <div class="content-btn">
+                        <p>Pour commencer à decouvrir vos artistes préférés</p>
+                        <a id="suivant" class="start" href="#cards">Cliquez ici</a>
+                      </div>
+            `;
+            flag=false;
+      }
       console.log(data.artistes);
       container.innerHTML = "";
       data.artistes.forEach((artiste) => {
