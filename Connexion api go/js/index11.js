@@ -80,7 +80,7 @@ function displayArtistById(id) {
       const navBar = document.querySelector(".container-header");
       const body = document.querySelector("body");
       body.style.overflow = "hidden";
-      navBar.style.visibility = "visible";
+      navBar.style.opacity = "0";
       const container = document.querySelector(".container-main-art");
       container.innerHTML = `
       <a href="http://localhost:8080/groupietracker"><img src="${data.artiste.Image}" alt="nom de l'artiste" class="img-art"></a>
@@ -162,6 +162,7 @@ function displayMatches() {
     search.style.opacity = "1";
     suggestions.innerHTML = "";
     body.style.overflow = "hidden";
+    document.querySelector(".presentation").innerHTML = "";
   } else {
     suggestions.innerHTML = html;
     search.style.opacity = "0";
